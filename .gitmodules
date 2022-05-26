@@ -1,0 +1,3 @@
+[submodule "imagebuilder"]
+	path = imagebuilder
+	url = https://github.com/gl-inet/imagebuilder
