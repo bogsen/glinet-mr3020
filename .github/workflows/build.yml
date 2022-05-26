@@ -1,0 +1,32 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: python2.7 gl_imagebuilder/gl_image --ignore --config images.json --profile tl-mr3020-v3
+    - name: Ensure image is small enough for jffs persistence
+      run: |
+        set -ex
+        [ $(wc -c < imagebuilder/3.8/openwrt-imagebuilder-ramips-mt76x8_3.8/build_dir/target-mipsel_24kc_musl/linux-ramips_mt76x8/root.squashfs) -lt 5948000 ]
+    # - uses: mxschmitt/action-tmate@v3
+    #   if: always()
+    - run: tar czf openwrt-rootfs.tar.gz -C imagebuilder/3.8/openwrt-imagebuilder-ramips-mt76x8_3.8/build_dir/target-mipsel_24kc_musl/root-ramips/ .
+      if: always()
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: openwrt-tl-mr3020-v3-rootfs
+        path: openwrt-rootfs.tar.gz
+        if-no-files-found: error
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: openwrt-tl-mr3020-v3-images
+        path: imagebuilder/3.8/openwrt-imagebuilder-ramips-mt76x8_3.8/bin/targets/ramips/mt76x8/openwrt-tl-mr3020-v3-*
+        if-no-files-found: error
