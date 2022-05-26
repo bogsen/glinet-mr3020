@@ -1,0 +1,5 @@
+do_sysinfo_override() {
+	echo gl-mt300n-v2 > /tmp/sysinfo/board_name
+}
+
+boot_hook_add preinit_main do_sysinfo_override

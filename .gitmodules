@@ -1,3 +1,7 @@
-[submodule "imagebuilder"]
-	path = imagebuilder
+[submodule "gl_imagebuilder"]
+	path = gl_imagebuilder
 	url = https://github.com/gl-inet/imagebuilder
+[submodule "glinet"]
+	path = glinet
+	url = https://github.com/gl-inet/glinet
+	shallow = true

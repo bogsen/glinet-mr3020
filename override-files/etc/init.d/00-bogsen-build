@@ -1,0 +1,23 @@
+#!/bin/sh /etc/rc.common
+
+enable() {
+  echo bogsen making build small
+
+  rm -r www/src/static/fonts/*.{eot,otf,ttf,svg,woff2}
+  opkg --offline-root . remove ca-certificates --force-depends
+  opkg --offline-root . remove ca-bundle --force-depends # hmm maybe not actually needed
+  find . -name .DS_Store -type f -delete
+  rm -r www/src/temple/{adblock,adguardhome,rs485,ssclient,ssserver,tor,vpnclient,vpnserver,wgserver}
+  opkg --offline-root . remove libxml2 --force-depends # libplist doesn't actually require it anymore since 2.0.0
+  rm etc/tertf/mac_vendor.db
+  rm www/src/static/images/{AP1300-01.svg,AR750-01.svg,AX1800-01.svg,B1300-01.svg,B2200-01.svg,mifi-01.svg,MIFI-V3.svg,MT1300-01.svg,MV1000-01.svg,MV1000-02-01-01.svg,SF1200-01.svg,tor_onion.svg,vixmini_logo.png,X300B-01.svg,X750-01.svg,X1200-01.svg,XE300-01.svg}
+  rm www/src/static/images/background.jpg
+
+  OPKG_TEMP=$(mktemp -d)
+  echo deleting opkg files, backup at $OPKG_TEMP
+  cp -R usr/lib/opkg $OPKG_TEMP/
+  rm -r usr/lib/opkg/info usr/lib/opkg/status
+
+  echo done
+  rm etc/init.d/00-bogsen-build
+}
