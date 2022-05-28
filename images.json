@@ -10,7 +10,7 @@
 		"siflower_driver": "kmod-sf_smac kmod-sf_hnat kmod-sf_gmac kmod-sf_eswitch kmod-sf_netlink kmod-sfax8-factory-read kmod-mac80211 libnl hostapd-scripts e2fsprogs kmod-crypto-crc32c kmod-fuse kmod-lib-crc16 kmod-swconfig libacl libncurses libnet-1.2.x libnetfilter-cthelper libnetfilter-cttimeout libnetfilter-queue snapshot-tool libcares"
 	},
 	"profiles": {
-		"tl-mr3020-v3": {
+		"tl-mr3020-v3-glinet": {
 			"state": "develop",
 			"disabled": 0,
 			"profile": "tplink_tl-mr3020-v3",
@@ -25,7 +25,7 @@
 			"profile": "tplink_tl-mr3020-v3",
 			"version": "3.211",
 			"imagebuilder": "3.8/openwrt-imagebuilder-ramips-mt76x8_3.8",
-			"packages": "gl-base-files-mt -kmod-mt76 -kmod-mt76-core -kmod-mt7603 kmod-mt7628 gl-sdk4-mtk-apcli mt76x8-uci2dat luci"
+			"packages": "-kmod-mt76 -kmod-mt76-core -kmod-mt7603 kmod-mt7628 gl-sdk4-mtk-apcli mt76x8-uci2dat luci"
 		}
 	}
 }
