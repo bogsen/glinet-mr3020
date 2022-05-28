@@ -15,7 +15,7 @@ gl-inet distro for TP-Link MR3020 v3. Limited space so limited features:
 Using CI workflow:
 ```
 $ brew install act
-$ act --artifact-server-path artifacts --env GITHUB_RUN_ID=$(date +%s) --reuse
+$ act --artifact-server-path artifacts --env GITHUB_RUN_ID=$(date +%Y%m%d%H%M%S) --reuse
 ```
 
 Using gl_imagebuilder:

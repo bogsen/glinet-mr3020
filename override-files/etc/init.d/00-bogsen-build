@@ -2,7 +2,6 @@
 
 enable() {
   echo bogsen making build small
-
   rm -r www/src/static/fonts/*.{eot,otf,ttf,svg,woff2}
   opkg --offline-root . remove ca-certificates --force-depends
   opkg --offline-root . remove ca-bundle --force-depends # hmm maybe not actually needed
@@ -12,12 +11,14 @@ enable() {
   rm etc/tertf/mac_vendor.db
   rm www/src/static/images/{AP1300-01.svg,AR750-01.svg,AX1800-01.svg,B1300-01.svg,B2200-01.svg,mifi-01.svg,MIFI-V3.svg,MT1300-01.svg,MV1000-01.svg,MV1000-02-01-01.svg,SF1200-01.svg,tor_onion.svg,vixmini_logo.png,X300B-01.svg,X750-01.svg,X1200-01.svg,XE300-01.svg}
   rm www/src/static/images/background.jpg
-
-  OPKG_TEMP=$(mktemp -d)
-  echo deleting opkg files, backup at $OPKG_TEMP
-  cp -R usr/lib/opkg $OPKG_TEMP/
   rm -r usr/lib/opkg/info usr/lib/opkg/status
-
   echo done
+
+  echo bogsen fixing board detection
+  echo 'get_model() { echo "mt300n-v2"; }' >> lib/functions/gl_util.sh
+  echo 'get_default_mac_with_colon() { cat /sys/class/net/eth0/address; }' >> lib/functions/gl_util.sh
+  echo 'get_default_mac() { get_default_mac_with_colon | sed s/://g; }' >> lib/functions/gl_util.sh
+  echo done
+
   rm etc/init.d/00-bogsen-build
 }
