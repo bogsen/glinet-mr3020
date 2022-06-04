@@ -1,5 +1,7 @@
 ## What?
 
+⚠️ **WARNING** ⚠️ Restoring back to stock firmware may not work properly, use at your own risk! At some point while playing around with this firmware my router stopped being able to boot stock firmware, but it still works fine with OpenWRT.
+
 gl-inet distro for TP-Link MR3020 v3. Limited space so limited features:
 - 4G, USB tethering and repeater mode supported
 - Wireguard supported (client mode only)
